@@ -2,6 +2,7 @@ export const state = () => ({
     news: [],
     loading: true,
     detailNews: {},
+    editNews: {},
   })
   
   export const getters = {
@@ -10,6 +11,9 @@ export const state = () => ({
     },
     getDetailNews(state) {
       return state.detailNews;
+    },
+    getEditNews(state) {
+      return state.editNews;
     },
     isLoading(state) {
       return state.loading;
@@ -26,6 +30,10 @@ export const state = () => ({
     setDetailNews(state, payload) {
       state.detailNews = payload;
       this.$router.push({ name: "detail-id", params: { id: payload.id } } )
+    },
+    setEditNews(state, payload) {
+      state.editNews = payload.content;
+      this.$router.push({ name: "edit-id", params: { id: payload.id } } )
     }
   }
   

@@ -14,7 +14,7 @@
                 />
             </div>
             <div class="article-button">
-                <button class="button">Edit Artikel</button>
+                <button class="button" @click="handleEditArtikel">Edit Artikel</button>
             </div>
       </article>
     </section>
@@ -27,7 +27,51 @@ export default {
     name: "DetailNews",
     computed: {
         ...mapGetters(['getDetailNews']),
-    }
+    },
+    methods: {
+        handleEditArtikel() {
+            // const editNews = {
+            //     "type": "doc",
+            //     "content": [
+            //         {
+            //             "type": "heading",
+            //             "attrs": {
+            //                 "level": 1,
+            //             },
+            //             "content": [
+            //                 {
+            //                     "type": "text",
+            //                     "text": this.getDetailNews.title,
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             "type": "paragraph",
+            //             "content": [
+            //                 {
+            //                     "type": "text",
+            //                     "text": this.getDetailNews.contentSnippet,
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             "type": "image",
+            //             "content": [
+            //                 {
+            //                     "type": "image",
+            //                     "path": this.getDetailNews.image.large
+            //                 }
+            //             ]
+            //         }
+            //     ]
+            // }
+            const editNews = {
+                id: this.getDetailNews.id,
+                content: `<h1>${this.getDetailNews.title}</h1><br><p>${this.getDetailNews.contentSnippet}</p><br><img src=${this.getDetailNews.image.large} />`,
+            }
+            this.$store.commit("setEditNews", editNews);
+        }
+    },
 }
 </script>
 

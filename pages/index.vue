@@ -37,6 +37,7 @@
             :src="getNews[0].image.large"
             width="500"
             loading="lazy"
+            @click="getDetailNews(getNews[0])"
           />
         </div>
       </article>
@@ -44,7 +45,7 @@
         <h2 class="sidebar__title">Terpopuler</h2>
         <hr class="sidebar__underline">
         <ul class="sidebar__populer-list">
-          <li v-for="(news, index) in getNews.slice(0,10)" :key="news.id" class="list">
+          <li v-for="(news, index) in getNews.slice(0,10)" :key="news.id" class="list" @click="getDetailNews(news)">
             <span class="index">{{ index + 1 }}</span>
             <h2 class="title">{{ news.title }}</h2>
           </li>
@@ -55,7 +56,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex';
 import BaseSkeleton from '../components/BaseSkeleton.vue';
 
 export default {
@@ -69,11 +70,14 @@ export default {
   },
   methods: {
     ...mapActions(['getNewsData']),
+    getDetailNews(news) {
+      this.$store.commit("setDetailNews", news);
+    }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .main {
   display: flex;
   padding-top: 20px;
